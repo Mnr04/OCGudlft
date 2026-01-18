@@ -22,6 +22,7 @@ clubs = loadClubs()
 
 @app.route('/')
 def index():
+    print("le serveur fonctionne")
     return render_template('index.html')
 
 @app.route('/showSummary',methods=['POST'])
