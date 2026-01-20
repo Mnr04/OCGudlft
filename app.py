@@ -56,6 +56,7 @@ def purchasePlaces():
         return render_template('welcome.html', club=club, competitions=competitions)
 
     if placesRequired > 12:
+        flash('Error , max 12 places')
         return render_template('welcome.html', club=club, competitions=competitions)
 
     competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
