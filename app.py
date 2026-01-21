@@ -40,8 +40,8 @@ def book(competition,club):
     foundClub = [c for c in clubs if c['name'] == club][0]
     foundCompetition = [c for c in competitions if c['name'] == competition][0]
 
-    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    if foundCompetition['date'] < now:
+    competition_date = datetime.strptime(foundCompetition['date'], "%Y-%m-%d %H:%M:%S")
+    if competition_date < datetime.now():
         flash("Compétition already finish.")
         return render_template('welcome.html', club=foundClub, competitions=competitions)
 
