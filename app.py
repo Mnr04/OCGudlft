@@ -31,8 +31,8 @@ def showSummary():
         club = [club for club in clubs if club['email'] == request.form['email']][0]
         return render_template('welcome.html',club=club,competitions=competitions)
     except IndexError:
-        flash("Email Inconnu ")
-        return "Email Inconnu"
+        flash("Unknown email")
+        return "Unknown email"
 
 
 @app.route('/book/<competition>/<club>')
@@ -42,7 +42,7 @@ def book(competition,club):
 
     competition_date = datetime.strptime(foundCompetition['date'], "%Y-%m-%d %H:%M:%S")
     if competition_date < datetime.now():
-        flash("Compétition already finish.")
+        flash("Competition already finish.")
         return render_template('welcome.html', club=foundClub, competitions=competitions)
 
     if foundClub and foundCompetition:
