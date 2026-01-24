@@ -1,18 +1,39 @@
-<h2>Points Dashboard</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Club Name</th>
-            <th>Points</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for club in clubs %}
-        <tr>
-            <td>{{ club.name }}</td>
-            <td>{{ club.points }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<a href="/">Back to Login</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUDLFT - Public Points</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <h1>Current Club Standings</h1>
+    <p>Here is the public overview of points available for each club.</p>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Club Name</th>
+                    <th>Points Available</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for club in clubs %}
+                <tr>
+                    <td>{{ club['name'] }}</td>
+                    <td>{{ club['points'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+    <div>
+        <a href="/" class="btn"> Back to Login</a>
+    </div>
+
+</body>
+</html>
