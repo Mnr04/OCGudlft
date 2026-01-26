@@ -1,5 +1,5 @@
 import json
-from flask import Flask,render_template,request,redirect,flash,url_for
+from flask import Flask,render_template,request,redirect,flash,url_for,session
 from datetime import datetime
 
 
@@ -23,6 +23,7 @@ clubs = loadClubs()
 
 @app.route('/')
 def index():
+    session.pop('_flashes', None)
     return render_template('index.html')
 
 @app.route('/showSummary',methods=['POST'])
@@ -32,7 +33,7 @@ def showSummary():
         return render_template('welcome.html',club=club,competitions=competitions)
     except IndexError:
         flash("Unknown email")
-        return "Unknown email"
+        return render_template('index.html')
 
 
 @app.route('/book/<competition>/<club>')
