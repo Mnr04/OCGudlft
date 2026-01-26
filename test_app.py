@@ -21,7 +21,7 @@ def test_login_invalid_email():
 def test_purchase_places():
     client = app.test_client()
 
-    club_name = "Simply Lit"
+    club_name = "Simply Lift"
     competition_name = "Spring Festival"
     places_requested = 1
 
