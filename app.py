@@ -3,6 +3,7 @@ from flask import Flask,render_template,request,redirect,flash,url_for,session
 from datetime import datetime
 
 
+
 def loadClubs():
     with open('clubs.json') as c:
          listOfClubs = json.load(c)['clubs']
@@ -52,12 +53,22 @@ def book(competition,club):
         flash("Something went wrong-please try again")
         return render_template('welcome.html', club=club, competitions=competitions)
 
+history = []
 
 @app.route('/purchasePlaces',methods=['POST'])
 def purchasePlaces():
     competition = [c for c in competitions if c['name'] == request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
+
+    placesTaken = 0
+    for order in history:
+        if order['club'] == club['name'] and order['competition'] == competition['name']:
+            placesTaken += order['places']
+
+    if placesTaken + placesRequired > 12:
+        flash(f"Error: You have already booked {placesTaken} places. Max 12 places in total.")
+        return render_template('welcome.html', club=club, competitions=competitions)
 
     if placesRequired > int(club['points']):
         flash("Not enougth points to buy")
@@ -69,7 +80,13 @@ def purchasePlaces():
 
     competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
 
-    club['points'] = int(club['points']) - placesRequired
+    club['points'] = int(club['point']) - placesRequired
+
+    history.append({
+        "club": club['name'],
+        "competition": competition['name'],
+        "places": placesRequired
+    })
 
     flash('Great-booking complete!')
     return render_template('welcome.html', club=club, competitions=competitions)
