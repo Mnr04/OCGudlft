@@ -80,7 +80,7 @@ def purchasePlaces():
 
     competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
 
-    club['points'] = int(club['point']) - placesRequired
+    club['points'] = int(club['points']) - placesRequired
 
     history.append({
         "club": club['name'],
