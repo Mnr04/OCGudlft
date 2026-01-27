@@ -21,14 +21,39 @@ def test_login_invalid_email():
 def test_purchase_places():
     client = app.test_client()
 
-    club_name = "Simply Lift"
-    competition_name = "Spring Festival"
-    places_requested = 1
-
     response = client.post('/purchasePlaces', data={
-        'club': club_name,
-        'competition': competition_name,
-        'places': places_requested
+        'club': "Simply Lift",
+        'competition': "Spring Festival",
+        'places': 1
     }, follow_redirects=True)
 
     assert b"Points available: 12" in response.data
+
+def test_purchase_13_places():
+    client = app.test_client()
+
+    response = client.post('/purchasePlaces', data={
+        'club': 'She Lifts',
+        'competition': 'New Classic',
+        'places': 13
+    }, follow_redirects=True)
+
+    assert response.status_code == 200
+    assert b"Error" in response.data
+
+def test_purchase_13_two_times():
+    client = app.test_client()
+
+    client.post('/purchasePlaces', data={
+        'club': 'She Lifts',
+        'competition': 'New Classic',
+        'places': 6
+    })
+
+    response = client.post('/purchasePlaces', data={
+        'club': 'She Lifts',
+        'competition': 'New Classic',
+        'places': 7
+    }, follow_redirects=True)
+
+    assert b"Error" in response.data
