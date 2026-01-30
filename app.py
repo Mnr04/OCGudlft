@@ -61,6 +61,9 @@ def purchasePlaces():
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
 
+    if placesRequired > int(competition['numberOfPlaces']):
+        return render_template('welcome.html', club=club, competitions=competitions)
+
     placesTaken = 0
     for order in history:
         if order['club'] == club['name'] and order['competition'] == competition['name']:
