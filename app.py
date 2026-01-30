@@ -62,12 +62,12 @@ def purchasePlaces():
     placesRequired = int(request.form['places'])
 
     if placesRequired > int(competition['numberOfPlaces']):
+        flash("Not enough places available.")
         return render_template('welcome.html', club=club, competitions=competitions)
 
     placesTaken = 0
     for order in history:
         if order['club'] == club['name'] and order['competition'] == competition['name']:
-            flash("Not enougth points to buy")
             placesTaken += order['places']
 
     if placesTaken + placesRequired > 12:

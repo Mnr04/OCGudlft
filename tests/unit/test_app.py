@@ -57,3 +57,15 @@ def test_purchase_13_two_times():
     }, follow_redirects=True)
 
     assert b"Error" in response.data
+
+def test_buy_limit():
+    client = app.test_client()
+
+    response = client.post('/purchasePlaces', data={
+        'club': 'Simply Lift',
+        'competition': 'Fall Classic',
+        'places': 100
+    }, follow_redirects=True)
+
+    assert response.status_code == 200
+    assert b"Not enough places available" in response.data
