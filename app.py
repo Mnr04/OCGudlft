@@ -67,6 +67,7 @@ def purchasePlaces():
     placesTaken = 0
     for order in history:
         if order['club'] == club['name'] and order['competition'] == competition['name']:
+            flash("Not enougth points to buy")
             placesTaken += order['places']
 
     if placesTaken + placesRequired > 12:
