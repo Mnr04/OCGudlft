@@ -53,3 +53,16 @@ def test_buy_limit():
 
     assert response.status_code == 200
     assert b"Not enough points to buy" in response.data
+
+def test_points_are_deducted():
+    client = app.test_client()
+
+    client.post('/purchasePlaces', data={
+        'club': 'Simply Lift',
+        'competition': 'Test',
+        'places': 2
+    }, follow_redirects=True)
+
+    from app import clubs
+    club = [c for c in clubs if c['name'] == 'Simply Lift'][0]
+    assert int(club['points']) == 11
