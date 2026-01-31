@@ -3,11 +3,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GUDLFT Registration</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <ul>
+            <ul class="flashes">
             {% for message in messages %}
                 <li>{{ message }}</li>
             {% endfor %}
@@ -21,5 +22,6 @@
         <input type="email" name="email" id=""/>
         <button type="submit">Enter</button>
     </form>
+    <p>Check the club ranking : <a href="/dashboard">Dashboard</a></p>
 </body>
 </html>
