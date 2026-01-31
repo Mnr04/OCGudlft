@@ -13,6 +13,7 @@ def loadCompetitions():
          listOfCompetitions = json.load(comps)['competitions']
          return listOfCompetitions
 
+history = []
 
 app = Flask(__name__)
 app.secret_key = 'something_special'
@@ -60,7 +61,27 @@ def purchasePlaces():
         flash("No more than 12 places")
         return render_template('welcome.html', club=club, competitions=competitions)
 
+    placesTaken = 0
+    for order in history:
+        if order['club'] == club['name'] and order['competition'] == competition['name']:
+            placesTaken += order['places']
+
+    if placesTaken + placesRequired > 12:
+        flash(f"Error: You have already booked {placesTaken} places. Max 12 places in total.")
+        return render_template('welcome.html', club=club, competitions=competitions)
+
+
     competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
+
+    club['points'] = int(club['points']) - placesRequired
+
+    history.append({
+        "club": club['name'],
+        "competition": competition['name'],
+        "places": placesRequired
+    })
+
+
     flash('Great-booking complete!')
     return render_template('welcome.html', club=club, competitions=competitions)
 

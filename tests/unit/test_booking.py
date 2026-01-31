@@ -13,7 +13,7 @@ def test_book_past_competition_real_data():
     assert response.status_code == 200
     assert b"Competition is close" in response.data
 
-def test_book_more_than_12_places():
+def test_purchase_13_places():
     client = app.test_client()
 
     response = client.post('/purchasePlaces', data={
@@ -24,3 +24,20 @@ def test_book_more_than_12_places():
 
     assert response.status_code == 200
     assert b"No more than 12 places" in response.data
+
+def test_purchase_13_two_times():
+    client = app.test_client()
+
+    client.post('/purchasePlaces', data={
+        'club': 'She Lifts',
+        'competition': 'Test',
+        'places': 6
+    })
+
+    response = client.post('/purchasePlaces', data={
+        'club': 'She Lifts',
+        'competition': 'Test',
+        'places': 7
+    }, follow_redirects=True)
+
+    assert b"Error" in response.data
