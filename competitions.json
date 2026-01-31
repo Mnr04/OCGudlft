@@ -9,18 +9,6 @@
             "name": "Fall Classic",
             "date": "2020-10-22 13:30:00",
             "numberOfPlaces": "13"
-        },
-        {
-            "name": "New Classic",
-            "date": "2028-10-22 13:30:00",
-            "numberOfPlaces": "100"
-        },
-        {
-            "name": "Test 1 place",
-            "date": "2028-10-22 13:30:00",
-            "numberOfPlaces": "1"
         }
-
     ]
 }
-
