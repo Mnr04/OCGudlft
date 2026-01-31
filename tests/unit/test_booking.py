@@ -1,7 +1,7 @@
 from app import app
 import datetime
 
-def test_book_past_competition_real_data():
+def test_book_past_competition():
     client = app.test_client()
 
     response = client.post('/purchasePlaces', data={
@@ -41,3 +41,15 @@ def test_purchase_13_two_times():
     }, follow_redirects=True)
 
     assert b"Error" in response.data
+
+def test_buy_limit():
+    client = app.test_client()
+
+    response = client.post('/purchasePlaces', data={
+        'club': 'Iron Temple',
+        'competition': 'Test',
+        'places': 5
+    }, follow_redirects=True)
+
+    assert response.status_code == 200
+    assert b"Not enough points to buy" in response.data

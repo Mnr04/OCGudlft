@@ -61,6 +61,10 @@ def purchasePlaces():
         flash("No more than 12 places")
         return render_template('welcome.html', club=club, competitions=competitions)
 
+    if placesRequired > int(club['points']):
+        flash("Not enough points to buy")
+        return render_template('welcome.html', club=club, competitions=competitions)
+
     placesTaken = 0
     for order in history:
         if order['club'] == club['name'] and order['competition'] == competition['name']:
@@ -73,7 +77,7 @@ def purchasePlaces():
 
     competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
 
-    club['points'] = int(club['points']) - placesRequired
+
 
     history.append({
         "club": club['name'],
