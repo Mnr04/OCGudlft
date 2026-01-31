@@ -61,6 +61,11 @@ def purchasePlaces():
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
 
+    competition_date = datetime.strptime(competition['date'], "%Y-%m-%d %H:%M:%S")
+    if competition_date < datetime.now():
+        flash("Competition already finish.")
+        return render_template('welcome.html', club=club, competitions=competitions)
+
     if placesRequired > int(competition['numberOfPlaces']):
         flash("Not enough places available.")
         return render_template('welcome.html', club=club, competitions=competitions)

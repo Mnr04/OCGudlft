@@ -69,3 +69,14 @@ def test_buy_limit():
 
     assert response.status_code == 200
     assert b"Not enough places available" in response.data
+
+def test_book_past_competition():
+    client = app.test_client()
+    response = client.post('/purchasePlaces', data={
+        'club': 'Simply Lift',
+        'competition': 'Fall Classic',
+        'places': 1
+    }, follow_redirects=True)
+
+    assert response.status_code == 200
+    assert b"Competition already finish." in response.data
