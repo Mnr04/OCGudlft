@@ -1,6 +1,7 @@
 from app import app
 import datetime
 
+
 def test_book_past_competition():
     client = app.test_client()
 
@@ -66,3 +67,15 @@ def test_points_are_deducted():
     from app import clubs
     club = [c for c in clubs if c['name'] == 'Simply Lift'][0]
     assert int(club['points']) == 11
+
+def test_no_book_more_than_available():
+    client = app.test_client()
+
+    response = client.post('/purchasePlaces', data={
+        'club': 'Simply Lift',
+        'competition': 'New Classic',
+        'places': 6
+    }, follow_redirects=True)
+
+    assert response.status_code == 200
+    assert b"Not enough places available" in response.data
