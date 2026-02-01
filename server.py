@@ -94,7 +94,6 @@ def purchasePlaces():
     return render_template('welcome.html', club=club, competitions=competitions)
 
 
-
 @app.route('/dashboard')
 def pointsDisplay():
     return render_template('dashboard.html', clubs=clubs)
