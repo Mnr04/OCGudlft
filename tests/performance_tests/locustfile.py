@@ -1,5 +1,6 @@
 from locust import HttpUser, task, between
 
+
 class GudlftUser(HttpUser):
     wait_time = between(1, 5)
 
@@ -9,7 +10,9 @@ class GudlftUser(HttpUser):
 
     def on_start(self):
         self.client.get("/", name="Index")
-        self.client.post("/showSummary", data={'email': self.email_test}, name="Login")
+        self.client.post(
+            "/showSummary", data={'email': self.email_test}, name="Login"
+            )
 
     @task
     def test_dashboard(self):

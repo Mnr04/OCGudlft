@@ -6,3 +6,7 @@ lib
 __pycache__
 env/
 .DS_Store
+flake-report/
+htmlcov/
+.pytest_cache/
+.coverage

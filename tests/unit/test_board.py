@@ -1,6 +1,7 @@
 import server
 from server import app
 
+
 def test_points_board_display():
     server.clubs = [
         {"name": "Club A", "email": "a@a.com", "points": "10"},

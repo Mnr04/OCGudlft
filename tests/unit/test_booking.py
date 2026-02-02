@@ -1,9 +1,18 @@
 import server
 from server import app
 
+
 def test_book_past_competition():
-    server.clubs = [{"name": "Simply Lift", "email": "john@simplylift.co", "points": "13"}]
-    server.competitions = [{"name": "Past Comp", "date": "2020-03-27 10:00:00", "numberOfPlaces": "25"}]
+    server.clubs = [{
+        "name": "Simply Lift",
+        "email": "john@simplylift.co",
+        "points": "13"
+    }]
+    server.competitions = [{
+        "name": "Past Comp",
+        "date": "2020-03-27 10:00:00",
+        "numberOfPlaces": "25"
+    }]
     server.history = []
 
     client = app.test_client()
@@ -16,9 +25,18 @@ def test_book_past_competition():
     assert response.status_code == 200
     assert b"Competition is close" in response.data
 
+
 def test_purchase_13_places():
-    server.clubs = [{"name": "Simply Lift", "email": "john@simplylift.co", "points": "20"}]
-    server.competitions = [{"name": "Future Comp", "date": "2028-10-22 13:30:00", "numberOfPlaces": "20"}]
+    server.clubs = [{
+        "name": "Simply Lift",
+        "email": "john@simplylift.co",
+        "points": "20"
+    }]
+    server.competitions = [{
+        "name": "Future Comp",
+        "date": "2028-10-22 13:30:00",
+        "numberOfPlaces": "20"
+    }]
     server.history = []
 
     client = app.test_client()
@@ -31,9 +49,18 @@ def test_purchase_13_places():
     assert response.status_code == 200
     assert b"No more than 12 places" in response.data
 
+
 def test_purchase_13_two_times():
-    server.clubs = [{"name": "She Lifts", "email": "kate@shelifts.co.uk", "points": "20"}]
-    server.competitions = [{"name": "Future Comp", "date": "2028-10-22 13:30:00", "numberOfPlaces": "20"}]
+    server.clubs = [{
+        "name": "She Lifts",
+        "email": "kate@shelifts.co.uk",
+        "points": "20"
+    }]
+    server.competitions = [{
+        "name": "Future Comp",
+        "date": "2028-10-22 13:30:00",
+        "numberOfPlaces": "20"
+    }]
     server.history = []
 
     client = app.test_client()
@@ -52,9 +79,18 @@ def test_purchase_13_two_times():
 
     assert b"Error" in response.data
 
+
 def test_buy_limit():
-    server.clubs = [{"name": "Iron Temple", "email": "admin@irontemple.com", "points": "4"}]
-    server.competitions = [{"name": "Future Comp", "date": "2028-10-22 13:30:00", "numberOfPlaces": "20"}]
+    server.clubs = [{
+        "name": "Iron Temple",
+        "email": "admin@irontemple.com",
+        "points": "4"
+    }]
+    server.competitions = [{
+        "name": "Future Comp",
+        "date": "2028-10-22 13:30:00",
+        "numberOfPlaces": "20"
+    }]
     server.history = []
 
     client = app.test_client()
@@ -67,9 +103,18 @@ def test_buy_limit():
     assert response.status_code == 200
     assert b"Not enough points to buy" in response.data
 
+
 def test_points_are_deducted():
-    server.clubs = [{"name": "Simply Lift", "email": "john@simplylift.co", "points": "13"}]
-    server.competitions = [{"name": "Future Comp", "date": "2028-10-22 13:30:00", "numberOfPlaces": "20"}]
+    server.clubs = [{
+        "name": "Simply Lift",
+        "email": "john@simplylift.co",
+        "points": "13"
+    }]
+    server.competitions = [{
+        "name": "Future Comp",
+        "date": "2028-10-22 13:30:00",
+        "numberOfPlaces": "20"
+    }]
     server.history = []
 
     client = app.test_client()
@@ -82,9 +127,18 @@ def test_points_are_deducted():
     club = [c for c in server.clubs if c['name'] == 'Simply Lift'][0]
     assert int(club['points']) == 11
 
+
 def test_no_book_more_than_available():
-    server.clubs = [{"name": "Simply Lift", "email": "john@simplylift.co", "points": "13"}]
-    server.competitions = [{"name": "Small Comp", "date": "2028-10-22 13:30:00", "numberOfPlaces": "1"}]
+    server.clubs = [{
+        "name": "Simply Lift",
+        "email": "john@simplylift.co",
+        "points": "13"
+    }]
+    server.competitions = [{
+        "name": "Small Comp",
+        "date": "2028-10-22 13:30:00",
+        "numberOfPlaces": "1"
+    }]
     server.history = []
 
     client = app.test_client()
