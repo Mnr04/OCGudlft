@@ -9,6 +9,9 @@ class GudlftUser(HttpUser):
     competition_name = "Spring Festival"
 
     def on_start(self):
+        """
+        Log in the user before starting the performance tests.
+        """
         self.client.get("/", name="Index")
         self.client.post(
             "/showSummary", data={'email': self.email_test}, name="Login"
@@ -16,10 +19,16 @@ class GudlftUser(HttpUser):
 
     @task
     def test_dashboard(self):
+        """
+        Simulate a user go to the public dashboard.
+        """
         self.client.get("/dashboard", name="Dashboard")
 
     @task
     def test_booking_page(self):
+        """
+        Simulate a user go to the booking page competition.
+        """
         self.client.get(
             f"/book/{self.competition_name}/{self.club_name}",
             name="Page Reservation"
@@ -27,6 +36,9 @@ class GudlftUser(HttpUser):
 
     @task
     def test_purchase(self):
+        """
+        Simulate a user buying places.
+        """
         self.client.post(
             "/purchasePlaces",
             data={

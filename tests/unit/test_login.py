@@ -3,12 +3,18 @@ from server import app
 
 
 def test_launch_server():
+    """
+    Test if the server launches correctly.
+    """
     client = app.test_client()
     result = client.get('/')
     assert result.status_code == 200
 
 
 def test_login_unknown_email():
+    """
+    Test login with an unkwnow email.
+    """
     server.clubs = [{
         "name": "Club Test",
         "email": "test@club.com",
@@ -27,6 +33,9 @@ def test_login_unknown_email():
 
 
 def test_login_valid_email():
+    """
+    Test login with a valid email.
+    """
     server.clubs = [{
         "name": "Club Test",
         "email": "test@club.com",

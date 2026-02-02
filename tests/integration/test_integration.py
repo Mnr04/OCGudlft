@@ -4,7 +4,7 @@ from server import app
 
 def test_fonctionnalite_buy_full():
     """
-        Test complet : Login -> Achat -> Logout
+    Test the complete user flow: login, book places, update points, and logout.
     """
 
     server.clubs = [{

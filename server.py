@@ -4,12 +4,18 @@ from flask import Flask, render_template, request, redirect, flash, url_for
 
 
 def loadClubs():
+    """
+    Load the list of clubs from the JSON file.
+    """
     with open('clubs.json') as c:
         listOfClubs = json.load(c)['clubs']
         return listOfClubs
 
 
 def loadCompetitions():
+    """
+    Load the list of competitions from the JSON file.
+    """
     with open('competitions.json') as comps:
         listOfCompetitions = json.load(comps)['competitions']
         return listOfCompetitions
@@ -25,11 +31,17 @@ history = []
 
 @app.route('/')
 def index():
+    """
+    Render the homepage for user login.
+    """
     return render_template('index.html')
 
 
 @app.route('/showSummary', methods=['POST'])
 def showSummary():
+    """
+    Handle user login and display the club's dashboard.
+    """
     try:
         club = [
             club for club in clubs
@@ -47,6 +59,9 @@ def showSummary():
 
 @app.route('/book/<competition>/<club>')
 def book(competition, club):
+    """
+    Render the booking page for a specific competition and club.
+    """
     foundClub = [c for c in clubs if c['name'] == club][0]
     foundCompetition = [
         c for c in competitions
@@ -70,6 +85,9 @@ def book(competition, club):
 
 @app.route('/purchasePlaces', methods=['POST'])
 def purchasePlaces():
+    """
+    Process the booking request and update points and available places.
+    """
     competition = [
         c for c in competitions
         if c['name'] == request.form['competition']
@@ -153,9 +171,15 @@ def purchasePlaces():
 
 @app.route('/dashboard')
 def pointsDisplay():
+    """
+    Display the public points board for all clubs.
+    """
     return render_template('dashboard.html', clubs=clubs)
 
 
 @app.route('/logout')
 def logout():
+    """
+    Log out the user and redirect to the homepage.
+    """
     return redirect(url_for('index'))

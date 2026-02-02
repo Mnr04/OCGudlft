@@ -3,6 +3,9 @@ from server import app
 
 
 def test_points_board_display():
+    """
+    Test that the dashboard correctly displays.
+    """
     server.clubs = [
         {"name": "Club A", "email": "a@a.com", "points": "10"},
         {"name": "Club B", "email": "b@b.com", "points": "20"},

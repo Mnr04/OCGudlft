@@ -3,6 +3,9 @@ from server import app
 
 
 def test_book_past_competition():
+    """
+    Test booking for a past competition.
+    """
     server.clubs = [{
         "name": "Simply Lift",
         "email": "john@simplylift.co",
@@ -27,6 +30,9 @@ def test_book_past_competition():
 
 
 def test_purchase_13_places():
+    """
+    Test that a user cannot book more than 12 places in a single request.
+    """
     server.clubs = [{
         "name": "Simply Lift",
         "email": "john@simplylift.co",
@@ -51,6 +57,9 @@ def test_purchase_13_places():
 
 
 def test_purchase_13_two_times():
+    """
+    Test that a user cannot take 12 places in multiple requests.
+    """
     server.clubs = [{
         "name": "She Lifts",
         "email": "kate@shelifts.co.uk",
@@ -81,6 +90,9 @@ def test_purchase_13_two_times():
 
 
 def test_buy_limit():
+    """
+    Test that a club cannot book places if they dont have enouggh points.
+    """
     server.clubs = [{
         "name": "Iron Temple",
         "email": "admin@irontemple.com",
@@ -105,6 +117,9 @@ def test_buy_limit():
 
 
 def test_points_are_deducted():
+    """
+    Test that points are correctly remove after a purchase.
+    """
     server.clubs = [{
         "name": "Simply Lift",
         "email": "john@simplylift.co",
@@ -129,6 +144,9 @@ def test_points_are_deducted():
 
 
 def test_no_book_more_than_available():
+    """
+    Test that a user cannot book more places than has available.
+    """
     server.clubs = [{
         "name": "Simply Lift",
         "email": "john@simplylift.co",
