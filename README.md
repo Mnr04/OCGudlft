@@ -1,52 +1,86 @@
-# gudlift-registration
+# Güdlft - Competition Booking System (POC)
 
+This project is developed in **Python** using the **Flask** framework. It is a platform allowing club secretaries to register their athletes for regional competitions.
 
-1. Why
+The project focuses on code quality, testing coverage, and performance, in accordance with the specifications.
 
+## 📋 Prerequisites
 
-    This is a proof of concept (POC) project to show a light-weight version of our competition booking platform. The aim is the keep things as light as possible, and use feedback from the users to iterate.
+Before you begin, ensure you have installed:
+* **Python 3.x**
+* **pip**
+* **virtualenv**
 
-2. Getting Started
+## 🚀 Installation
 
-    This project uses the following technologies:
+Follow the steps below to set up the development environment locally.
 
-    * Python v3.x+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/Mnr04/OCGudlft.git
+    cd OCGudlft
+    ```
 
-    * [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+2.  **Create and activate the virtual environment:**
+    * *On macOS/Linux:*
+        ```bash
+        python3 -m venv env
+        source env/bin/activate
+        ```
+    * *On Windows:*
+        ```bash
+        python -m venv env
+        env\Scripts\activate
+        ```
 
-        Whereas Django does a lot of things for us out of the box, Flask allows us to add only what we need.
+3.  **Install dependencies:**
+    Install the required libraries (Flask, Pytest, Locust, Coverage, etc.):
+    ```bash
+    pip install -r requirements.txt
+    ```
 
+## 💻 Running the Application
 
-    * [Virtual environment](https://virtualenv.pypa.io/en/stable/installation.html)
+The project uses JSON files (`clubs.json` and `competitions.json`) as a temporary database.
 
-        This ensures you'll be able to install the correct packages without interfering with Python on your machine.
+1.  **Set the Flask environment variable:**
+    * *Mac/Linux:* `export FLASK_APP=server.py`
+    * *Windows:* `set FLASK_APP=server.py`
 
-        Before you begin, please ensure you have this installed globally.
+2.  **Start the server:**
+    ```bash
+    flask run
+    ```
+    Or alternatively:
+    ```bash
+    python -m flask run
+    ```
 
+3.  **Access the application:**
+    Open your browser at the following address: [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 
-3. Installation
+### Main Features:
+* **Login:** Use a club email found in `clubs.json` (ex : `john@simplylift.co`).
+* **Dashboard:** Accessible via `/dashboard` to view club rankings (public access).
+* **Booking:** Allows booking places (max 12 per competition).
 
-    - After cloning, change into the directory and type <code>virtualenv .</code>. This will then set up a a virtual python environment within that directory.
+---
 
-    - Next, type <code>source bin/activate</code>. You should see that your command prompt has changed to the name of the folder. This means that you can install packages in here without affecting affecting files outside. To deactivate, type <code>deactivate</code>
+## 🧪 Testing and Code Quality
 
-    - Rather than hunting around for the packages you need, you can install in one step. Type <code>pip install -r requirements.txt</code>. This will install all the packages listed in the respective file. If you install a package, make sure others know by updating the requirements.txt file. An easy way to do this is <code>pip freeze > requirements.txt</code>
+The project follows a strict testing architecture to ensure stability and performance.
 
-    - Flask requires that you set an environmental variable to the python file. However you do that, you'll want to set the file to be <code>server.py</code>. Check [here](https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application) for more details
+### 1. Running Unit and Integration Tests
+We use **Pytest** to run all tests (unit and integration).
 
-    - You should now be ready to test the application. In the directory, type either <code>flask run</code> or <code>python -m flask run</code>. The app should respond with an address you should be able to go to using your browser.
+```bash
+pytest
+```
 
-4. Current Setup
-
-    The app is powered by [JSON files](https://www.tutorialspoint.com/json/json_quick_guide.htm). This is to get around having a DB until we actually need one. The main ones are:
-
-    * competitions.json - list of competitions
-    * clubs.json - list of clubs with relevant information. You can look here to see what email addresses the app will accept for login.
-
-5. Testing
-
-    You are free to use whatever testing framework you like-the main thing is that you can show what tests you are using.
-
-    We also like to show how well we're testing, so there's a module called
-    [coverage](https://coverage.readthedocs.io/en/coverage-5.1/) you should add to your project.
+### 2. Coverage
+Checking Code Coverage, the goal is to maintain code coverage above 60%.
+```bash
+coverage run -m pytest
+coverage report
+```
 
