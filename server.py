@@ -98,6 +98,14 @@ def purchasePlaces():
     ][0]
     placesRequired = int(request.form['places'])
 
+    if placesRequired <= 0:
+        flash("You must book at least 1 place.")
+        return render_template(
+            'welcome.html',
+            club=club,
+            competitions=competitions
+        )
+
     competition_date = datetime.strptime(
         competition['date'], "%Y-%m-%d %H:%M:%S"
     )

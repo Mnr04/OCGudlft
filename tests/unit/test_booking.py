@@ -142,6 +142,36 @@ def test_points_are_deducted():
     club = [c for c in server.clubs if c['name'] == 'Simply Lift'][0]
     assert int(club['points']) == 11
 
+def test_purchase_negative_places():
+    """
+    Test that a user cannot book a negative number of places.
+    """
+    server.clubs = [{
+        "name": "Simply Lift",
+        "email": "john@simplylift.co",
+        "points": "20"
+    }]
+    server.competitions = [{
+        "name": "Future Comp",
+        "date": "2028-10-22 13:30:00",
+        "numberOfPlaces": "20"
+    }]
+    server.history = []
+
+    client = app.test_client()
+    response = client.post('/purchasePlaces', data={
+        'club': 'Simply Lift',
+        'competition': 'Future Comp',
+        'places': -5
+    }, follow_redirects=True)
+
+    assert response.status_code == 200
+    assert b"Great-booking complete!" not in response.data
+
+    club = [c for c in server.clubs if c['name'] == 'Simply Lift'][0]
+    assert int(club['points']) == 20
+
+
 
 def test_no_book_more_than_available():
     """
