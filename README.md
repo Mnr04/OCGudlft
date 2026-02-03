@@ -1,17 +1,17 @@
 # Güdlft - Competition Booking System (POC)
 
-This project is developed in **Python** using the **Flask** framework. It is a platform allowing club secretaries to register their athletes for regional competitions.
+This project is developed in Python using the Flask framework. It is a platform allowing club secretaries to register their athletes for regional competitions.
 
 The project focuses on code quality, testing coverage, and performance, in accordance with the specifications.
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before you begin, ensure you have installed:
 * **Python 3.x**
 * **pip**
 * **virtualenv**
 
-## 🚀 Installation
+## Installation
 
 Follow the steps below to set up the development environment locally.
 
@@ -39,7 +39,7 @@ Follow the steps below to set up the development environment locally.
     pip install -r requirements.txt
     ```
 
-## 💻 Running the Application
+## Running the Application
 
 The project uses JSON files (`clubs.json` and `competitions.json`) as a temporary database.
 
@@ -84,3 +84,14 @@ coverage run -m pytest
 coverage report
 ```
 
+### 3. Performance Tests (Locust)
+Performance is tested with Locust to simulate user load (response time < 5s and updates < 2s)
+
+1. Start Locust
+```bash
+locust -f tests/performance_tests/locustfile.py
+```
+
+2. Open the Locust interface in your browser: http://localhost:8089.
+
+3. Start the test with the desired parameters.

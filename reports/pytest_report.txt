@@ -1,0 +1,20 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.3, pytest-9.0.2, pluggy-1.6.0 -- /Users/elissa/Desktop/Python_Testing/env/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /Users/elissa/Desktop/Python_Testing
+plugins: locust-2.43.1
+collecting ... collected 11 items
+
+tests/integration/test_integration.py::test_fonctionnalite_buy_full PASSED [  9%]
+tests/unit/test_board.py::test_points_board_display PASSED               [ 18%]
+tests/unit/test_booking.py::test_book_past_competition PASSED            [ 27%]
+tests/unit/test_booking.py::test_purchase_13_places PASSED               [ 36%]
+tests/unit/test_booking.py::test_purchase_13_two_times PASSED            [ 45%]
+tests/unit/test_booking.py::test_buy_limit PASSED                        [ 54%]
+tests/unit/test_booking.py::test_points_are_deducted PASSED              [ 63%]
+tests/unit/test_booking.py::test_no_book_more_than_available PASSED      [ 72%]
+tests/unit/test_login.py::test_launch_server PASSED                      [ 81%]
+tests/unit/test_login.py::test_login_unknown_email PASSED                [ 90%]
+tests/unit/test_login.py::test_login_valid_email PASSED                  [100%]
+
+============================== 11 passed in 0.12s ==============================
