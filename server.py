@@ -96,7 +96,16 @@ def purchasePlaces():
         c for c in clubs
         if c['name'] == request.form['club']
     ][0]
-    placesRequired = int(request.form['places'])
+
+    try:
+        placesRequired = int(request.form['places'])
+    except ValueError:
+        flash("Please enter a valid number")
+        return render_template(
+            'welcome.html',
+            club=club,
+            competitions=competitions
+        )
 
     if placesRequired <= 0:
         flash("You must book at least 1 place.")

@@ -142,6 +142,7 @@ def test_points_are_deducted():
     club = [c for c in server.clubs if c['name'] == 'Simply Lift'][0]
     assert int(club['points']) == 11
 
+
 def test_purchase_negative_places():
     """
     Test that a user cannot book a negative number of places.
@@ -170,7 +171,6 @@ def test_purchase_negative_places():
 
     club = [c for c in server.clubs if c['name'] == 'Simply Lift'][0]
     assert int(club['points']) == 20
-
 
 
 def test_no_book_more_than_available():
