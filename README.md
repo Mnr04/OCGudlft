@@ -74,7 +74,7 @@ The project follows a strict testing architecture to ensure stability and perfor
 We use **Pytest** to run all tests (unit and integration).
 
 ```bash
-pytest
+python -m pytest
 ```
 
 ### 2. Coverage
