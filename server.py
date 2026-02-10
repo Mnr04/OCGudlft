@@ -42,6 +42,7 @@ def showSummary():
     """
     Handle user login and display the club's dashboard.
     """
+    # Issue 1: Entering a unknown email crashes the app
     try:
         club = [
             club for club in clubs
@@ -115,6 +116,7 @@ def purchasePlaces():
             competitions=competitions
         )
 
+    # Issue 5: Booking places in past competitions
     competition_date = datetime.strptime(
         competition['date'], "%Y-%m-%d %H:%M:%S"
     )
@@ -127,6 +129,7 @@ def purchasePlaces():
             competitions=competitions
         )
 
+    # Issue2: Clubs should not be able to use more than their points allowed
     if placesRequired > int(competition['numberOfPlaces']):
         flash("Not enough places available.")
         return render_template(
@@ -135,6 +138,7 @@ def purchasePlaces():
             competitions=competitions
         )
 
+    # Issue 4: No more than 12 places per competition
     if placesRequired > 12:
         flash("No more than 12 places")
         return render_template(
@@ -151,6 +155,7 @@ def purchasePlaces():
             competitions=competitions
         )
 
+    # Issue 4: No more more than 12 places per competition
     placesTaken = 0
     for order in history:
         if (order['club'] == club['name'] and
@@ -170,6 +175,7 @@ def purchasePlaces():
         int(competition['numberOfPlaces']) - placesRequired
     )
 
+    # Issue 6: Point updates are not reflected
     club['points'] = int(club['points']) - placesRequired
 
     history.append({
@@ -191,6 +197,7 @@ def pointsDisplay():
     """
     Display the public points board for all clubs.
     """
+    # Issue 7: FEATURE: Implement Points Display Board
     return render_template('dashboard.html', clubs=clubs)
 
 
